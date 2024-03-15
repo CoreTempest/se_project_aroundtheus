@@ -18,7 +18,9 @@ Created using HTML and CSS based on the outline provided by the TripleTen SE Tea
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
 **Video**
+
 Please visit the video link provided below for a quick 5 minute overview of the project from the author:
+https://www.loom.com/share/00c6acc1d8144f86a46f4c6231c936ef?sid=98425337-c6d0-4ade-a0db-b00a24571b88
 
 ## Plans for Improvement
 

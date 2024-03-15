@@ -15,11 +15,18 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin-top: 45px;
 }
 
 @media screen and (max-width: 1100px) {
   .page__content {
-    margin: 0 20px;
+    margin: 45px 20px 0;
     max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .page__content {
+    margin-top: 28px;
   }
 }
