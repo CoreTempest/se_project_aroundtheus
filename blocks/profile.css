@@ -37,6 +37,7 @@
   grid-area: button;
   margin: 15px 0 0 18px;
   border: 1px solid #fff;
+  cursor: url(../images/finger.png), pointer;
 }
 
 .profile__edit-button:hover {
@@ -59,7 +60,8 @@
   width: 150px;
   height: 50px;
   margin-left: 165px;
-  border-color: white;
+  border: 2px solid #fff;
+  cursor: url(../images/finger.png), pointer;
 }
 
 .profile__add-button:hover {
@@ -93,7 +95,7 @@
     text-align: center;
     margin-top: 14px;
     max-width: 282px;
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .profile__add-button {
@@ -101,7 +103,8 @@
     margin-left: 19px;
     margin-bottom: 36px;
     width: 282px;
-    border: 2px solid #fff;
+    cursor: url(../images/finger.png), pointer;
+    background-size: 16px;
   }
 
   .profile__image {
@@ -113,17 +116,17 @@
     margin-left: 10px;
     width: 18px;
     height: 18px;
+    cursor: url(../images/finger.png), pointer;
+    background-size: 7.5px;
   }
 }
 
 @media screen and (min-width: 581px) and (max-width: 850px) {
   .profile__edit-button {
     margin-right: 18px;
-    background-size: 7.5px;
   }
 
   .profile__add-button {
     width: 150px;
-    background-size: 16px;
   }
 }

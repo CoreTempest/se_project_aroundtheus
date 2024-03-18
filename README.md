@@ -19,7 +19,7 @@ Created using HTML and CSS based on the outline provided by the TripleTen SE Tea
 
 **GitHub Pages Link**
 
-https://github.com/CoreTempest/se_project_aroundtheus
+https://coretempest.github.io/se_project_aroundtheus/
 
 **Video**
 

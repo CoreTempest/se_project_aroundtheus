@@ -17,15 +17,6 @@
   max-width: 219px;
 }
 
-.cards__list {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, 282px);
-  grid-gap: 20px 17px;
-  padding: 0;
-  margin: 51px 0 0 0;
-}
-
 .card__image {
   object-fit: contain;
   object-position: 50% 50%;
@@ -48,15 +39,9 @@
   height: 18px;
   border: none;
   transition: all 1s ease-out;
-  cursor: pointer;
+  cursor: url(../images/finger.png), pointer;
 }
 
 .card__like-button:hover {
   opacity: 50%;
-}
-
-@media screen and (max-width: 580px) {
-  .cards__list {
-    margin-top: 0px;
-  }
 }
