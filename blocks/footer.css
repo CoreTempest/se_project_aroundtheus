@@ -1,9 +1,22 @@
 .footer {
-  margin-top: 67px;
   color: #545454;
 }
 
 .footer__text {
   font-size: 18px;
   line-height: 1.2;
+  margin-top: 67px;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 580px) {
+  .footer {
+    margin-top: 48px;
+    margin-bottom: 36px;
+  }
+
+  .footer__text {
+    font-size: 14px;
+    margin-left: 20px;
+  }
 }

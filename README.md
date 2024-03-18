@@ -17,6 +17,10 @@ Created using HTML and CSS based on the outline provided by the TripleTen SE Tea
 
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
+**GitHub Pages Link**
+
+https://github.com/CoreTempest/se_project_aroundtheus
+
 **Video**
 
 Please visit the video link provided below for a quick 5 minute overview of the project from the author:

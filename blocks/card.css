@@ -3,9 +3,7 @@
   flex-direction: column;
   list-style: none;
   border-radius: 10px;
-  width: 282px;
-  max-height: 381px;
-  height: 100%;
+  overflow: hidden;
 }
 
 .card__title {
@@ -16,9 +14,10 @@
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
+  max-width: 219px;
 }
 
-.card__list {
+.cards__list {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
@@ -28,18 +27,16 @@
 }
 
 .card__image {
-  width: 282px;
-  height: 282px;
+  object-fit: contain;
+  object-position: 50% 50%;
 }
 
 .card__description {
   display: flex;
   background-color: white;
   color: black;
-  padding: 25px 69px 25px 20px;
+  padding: 25px 20px;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
   justify-content: space-between;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -50,6 +47,8 @@
   width: 21px;
   height: 18px;
   border: none;
+  transition: all 1s ease-out;
+  cursor: pointer;
 }
 
 .card__like-button:hover {
@@ -57,7 +56,7 @@
 }
 
 @media screen and (max-width: 580px) {
-  .card__list {
+  .cards__list {
     margin-top: 0px;
   }
 }
