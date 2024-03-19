@@ -39,7 +39,7 @@
   height: 18px;
   border: none;
   transition: all 1s ease-out;
-  cursor: url(../images/finger.png), pointer;
+  cursor: pointer;
 }
 
 .card__like-button:hover {

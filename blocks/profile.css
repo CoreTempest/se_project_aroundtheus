@@ -37,7 +37,7 @@
   grid-area: button;
   margin: 15px 0 0 18px;
   border: 1px solid #fff;
-  cursor: url(../images/finger.png), pointer;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -61,7 +61,8 @@
   height: 50px;
   margin-left: 165px;
   border: 2px solid #fff;
-  cursor: url(../images/finger.png), pointer;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {
@@ -103,7 +104,7 @@
     margin-left: 19px;
     margin-bottom: 36px;
     width: 282px;
-    cursor: url(../images/finger.png), pointer;
+    cursor: pointer;
     background-size: 16px;
   }
 
@@ -116,7 +117,7 @@
     margin-left: 10px;
     width: 18px;
     height: 18px;
-    cursor: url(../images/finger.png), pointer;
+    cursor: pointer;
     background-size: 7.5px;
   }
 }
