@@ -18,8 +18,8 @@
 }
 
 .card__image {
-  object-fit: contain;
   object-position: 50% 50%;
+  height: 362px;
 }
 
 .card__description {
