@@ -30,7 +30,7 @@ const initialCards = [
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#edit-modal");
-
+const addCardModal = document.querySelector("#add-card-modal");
 const profileCloseBtn = document.querySelector("#modal-close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -38,29 +38,24 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+const profileModalCloseBtn = profileEditModal.querySelector(".modal__close");
+const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 const cardListEl = document.querySelector(".cards__list");
 
-const nameInput = profileEditForm.querySelector(".modal__input_type_name");
-const jobInput = profileEditForm.querySelector(
-  ".modal__input_type_description"
-);
 const addNewCardButton = document.querySelector(".profile__add-button");
 
 /*Functions*/
 /*Functions*/
 
-function closeModal() {
-  profileEditModal.classList.remove("modal_opened");
+function openModal(modal) {
+  modal.classList.add("modal_opened");
 }
-
-function openModal() {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileDescription.textContent;
-  profileEditModal.classList.add(".modal__is_opened");
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -79,18 +74,17 @@ function getCardElement(cardData) {
 /*Event Listeners*/
 
 profileEditBtn.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
 
-profileCloseBtn.addEventListener("click", () => {
-  closeModal();
+profileModalCloseBtn.addEventListener("click", () => {
+  closeModal(profileEditModal);
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-addNewCardButton.addEventListener("click", openModal);
+addNewCardButton.addEventListener("click", () => openModal(addCardModal));
+addCardModalCloseBtn.addEventListener("click", () => closeModal(addCardModal));
 
 /*Event Handlers*/
 /*Event Handlers*/
