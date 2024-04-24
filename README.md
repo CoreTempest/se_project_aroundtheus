@@ -2,7 +2,7 @@
 
 **Intro**
 
-In this project, the goal was to create a webpage that can adapt to different sized devices (i.e, mobile, tablet, and desktop) with smooth transitions at specific screen dimensions. To accomplish this goal, a mix of flex and grid displays was incorporated. This allowed the site to be flexible enough to adapt to all screen sizes. In addition to grid and flex displays, the following properties were included as well:
+In this project, my goal was to create a webpage that can adapt to different sized devices (i.e, mobile, tablet, and desktop) with smooth transitions at specific screen dimensions. To accomplish this goal, a mix of flex and grid displays has been incorporated. This allows the site to be flexible enough to adapt to any screen size. In addition to grid and flex displays, the following properties were included as well:
 
 - Media Inquiries
 - Max-width
@@ -11,11 +11,17 @@ In this project, the goal was to create a webpage that can adapt to different si
 - Border properties including radius and color
 - Images
 
-Created using HTML and CSS based on the outline provided by the TripleTen SE Team.
+JavaScript was added in the most recent edition of the website and includes commands such as:
+
+- Event Listeners
+- Functions
+- Element Identifiers
+
+Created using HTML, CSS, and JS based on an outline provided by the TripleTen SE Team.
 
 **Figma**
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Link to the project on Figma](<https://www.figma.com/file/JFPhASqvZ5pBjQV2ouUlim/Sprint-5_-Around-The-U.S.-_-desktop-%2B-mobile-(Copy)?type=design&node-id=0-1&mode=design&t=va1KuazgxOfNynd5-0#40;Copy)?t=3hvVWRz9LUFsxyNn-6>)
 
 **GitHub Pages Link**
 
@@ -30,3 +36,4 @@ https://www.loom.com/share/00c6acc1d8144f86a46f4c6231c936ef?sid=98425337-c6d0-4a
 
 1. Include additional hover effects for various elements such as card text and profile title.
 2. Enhance image quality
+3. Add additional transition properties
