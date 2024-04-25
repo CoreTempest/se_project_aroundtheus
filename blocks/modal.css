@@ -99,6 +99,13 @@
   max-width: 75vw;
 }
 
+.modal__image-title {
+  position: relative;
+  color: #fff;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 580px) {
   .modal__container {
     width: 282px;
