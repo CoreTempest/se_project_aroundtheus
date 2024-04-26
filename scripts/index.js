@@ -31,8 +31,10 @@ const initialCards = [
 const cardListEl = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardFormElement = addCardModal.querySelector(".modal__form");
+const profileEditForm = document.querySelector("#edit-profile-form");
+const addCardFormElement = document.querySelector("#add-card-form");
+const modalImage = document.querySelector(".modal__image");
+const imageModalTitle = document.querySelector(".modal__image-title");
 
 // Buttons & DOM
 // Buttons & DOM
@@ -78,8 +80,6 @@ function getCardElement(cardData) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  const modalImage = document.querySelector(".modal__image");
-  const imageModalTitle = document.querySelector(".modal__image-title");
 
   deleteButton.addEventListener("click", () => {
     cardElement.remove(deleteButton);
@@ -99,7 +99,6 @@ function getCardElement(cardData) {
 
   cardImageEl.setAttribute("src", cardData.link);
   cardImageEl.setAttribute("alt", cardData.name);
-  cardImageEl.src = cardData.link;
   cardTitleEl.textContent = cardData.name;
 
   return cardElement;
