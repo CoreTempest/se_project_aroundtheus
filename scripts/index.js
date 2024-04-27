@@ -104,6 +104,12 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+function prefillProfileData() {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
+  openModal(profileEditModal);
+}
+
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
   wrapper.prepend(cardElement);
@@ -112,9 +118,7 @@ function renderCard(cardData, wrapper) {
 //Event Listeners
 //Event Listeners
 
-profileEditBtn.addEventListener("click", () => {
-  openModal(profileEditModal);
-});
+profileEditBtn.addEventListener("click", prefillProfileData);
 
 profileModalCloseBtn.addEventListener("click", () => {
   closeModal(profileEditModal);
