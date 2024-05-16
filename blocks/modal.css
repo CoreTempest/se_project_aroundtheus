@@ -157,3 +157,9 @@
     height: 299px;
   }
 }
+
+.popup__error {
+  color: red;
+  font-size: 12px;
+  padding-top: 5px;
+}
