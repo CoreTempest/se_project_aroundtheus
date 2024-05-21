@@ -119,10 +119,15 @@
   color: red;
   font-size: 12px;
   padding-top: 5px;
+  position: absolute;
 }
 
 .popup__input_type_error {
   border-bottom: 1px solid red;
+}
+
+.modal__label {
+  position: relative;
 }
 
 @media screen and (max-width: 580px) {

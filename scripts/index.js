@@ -47,7 +47,8 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-const profileModalCloseBtn = profileEditModal.querySelector(".modal__close");
+
+const closeButtons = document.querySelectorAll(".modal__close");
 const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const imageModalPreview = document.querySelector("#image-preview-modal");
@@ -67,13 +68,6 @@ const jobInput = document.querySelector(".modal__input_type_description");
 
 //Functions
 //Functions
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-}
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
 
 function handleEscapeToClose(event) {
   if (event.key === "Escape") {
@@ -137,8 +131,9 @@ function closeModal(modal) {
 
 profileEditBtn.addEventListener("click", prefillProfileData);
 
-profileModalCloseBtn.addEventListener("click", () => {
-  closeModal(profileEditModal);
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
