@@ -119,11 +119,20 @@ function renderCard(cardData, wrapper) {
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeToClose);
+  modal.addEventListener("mousedown", closeModalOnClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeToClose);
+  modal.removeEventListener("mousedown", closeModalOnClick);
+}
+
+function closeModalOnClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    const openModal = document.querySelectorAll(".modal_opened");
+    closeModal(openModal[0]);
+  }
 }
 
 //Event Listeners
