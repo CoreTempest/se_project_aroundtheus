@@ -52,7 +52,7 @@ const closeButtons = document.querySelectorAll(".modal__close");
 const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const imageModalPreview = document.querySelector("#image-preview-modal");
-const imageModalPreviewClose = imageModalPreview.querySelector(".modal__close");
+
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
@@ -130,8 +130,7 @@ function closeModal(modal) {
 
 function closeModalOnClick(evt) {
   if (evt.target === evt.currentTarget) {
-    const openModal = document.querySelectorAll(".modal_opened");
-    closeModal(openModal[0]);
+    closeModal(evt.currentTarget);
   }
 }
 
@@ -168,9 +167,5 @@ function handleAddCardFormSubmit(e) {
   addCardFormElement.reset();
   closeModal(addCardModal);
 }
-
-imageModalPreviewClose.addEventListener("click", () => {
-  closeModal(imageModalPreview);
-});
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
