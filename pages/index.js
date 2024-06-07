@@ -28,11 +28,6 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
 // Wrappers
 // Wrappers
 
@@ -43,6 +38,8 @@ const profileEditForm = document.querySelector("#edit-profile-form");
 const addCardFormElement = document.querySelector("#add-card-form");
 const modalImage = document.querySelector(".modal__image");
 const imageModalTitle = document.querySelector(".modal__image-title");
+const cardImage = document.querySelector(".card__image");
+const cardTitle = document.querySelector(".card__title");
 
 // Buttons & DOM
 // Buttons & DOM
@@ -94,8 +91,8 @@ const addFormValidator = new FormValidator(settings, addFormElement);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-// CARD
-// CARD
+// Card Preview
+// Card Preview
 
 function addCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
@@ -108,11 +105,19 @@ function renderCard(cardData, cardListElement) {
 }
 
 function handleImageClick(cardData) {
+  console.log(cardData);
+  modalImage.src = cardData.link;
+  imageModalTitle.alt = cardData.name;
+  imageModalTitle.textContent = cardData.name;
+  openModal(imageModalPreview);
+}
+
+/*cardImageEl.addEventListener("click", () => {
   modalImage.src = cardData.link;
   modalImage.alt = cardData.name;
   imageModalTitle.textContent = cardData.name;
   openModal(imageModalPreview);
-}
+});*/
 //Functions
 //Functions
 
