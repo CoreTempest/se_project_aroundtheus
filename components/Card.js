@@ -4,7 +4,6 @@ export default class Card {
     this._link = cardData.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._element = this._getTemplate;
   }
 
   _setEventListeners() {
@@ -30,7 +29,7 @@ export default class Card {
   }
 
   _handleLike() {
-    this._likeButton.classList.toggle(".card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   _handleDelete() {
