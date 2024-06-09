@@ -38,14 +38,11 @@ const profileEditForm = document.querySelector("#edit-profile-form");
 const addCardFormElement = document.querySelector("#add-card-form");
 const modalImage = document.querySelector(".modal__image");
 const imageModalTitle = document.querySelector(".modal__image-title");
-const cardImage = document.querySelector(".card__image");
-const cardTitle = document.querySelector(".card__title");
 
 // Buttons & DOM
 // Buttons & DOM
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
-const profileCloseBtn = document.querySelector("#modal-close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -54,12 +51,8 @@ const profileDescriptionInput = document.querySelector(
 );
 
 const closeButtons = document.querySelectorAll(".modal__close");
-const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const imageModalPreview = document.querySelector("#image-preview-modal");
-
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
 
 // Form Data
 // Form Data
@@ -105,7 +98,6 @@ function renderCard(cardData, cardListElement) {
 }
 
 function handleImageClick(cardData) {
-  console.log(cardData);
   modalImage.src = cardData.link;
   imageModalTitle.alt = cardData.name;
   imageModalTitle.textContent = cardData.name;
@@ -118,6 +110,7 @@ function handleImageClick(cardData) {
   imageModalTitle.textContent = cardData.name;
   openModal(imageModalPreview);
 });*/
+
 //Functions
 //Functions
 
