@@ -72,32 +72,32 @@ const settings = {
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: ".modal__button_disabled",
   inputErrorClass: ".modal__input_type_error",
-  errorClass: ".popup__error_visible",
+  errorClass: ".modal__error_visible",
 };
 
-const editFormElement = profileEditModal.querySelector(".modal__form");
-const addFormElement = addCardModal.querySelector(".modal__form");
-const editFormValidator = new FormValidator(settings, editFormElement);
-const addFormValidator = new FormValidator(settings, addFormElement);
+//const editFormElement = profileEditModal.querySelector(".modal__form");
+//const addFormElement = addCardModal.querySelector(".modal__form");
+const editFormValidator = new FormValidator(settings, profileEditModal);
+const addFormValidator = new FormValidator(settings, addCardModal);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 // Card Preview
 // Card Preview
 
-function addCard(cardData) {
+function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
 }
 
 function renderCard(cardData, cardListElement) {
-  const cardElement = addCard(cardData);
+  const cardElement = createCard(cardData);
   cardListElement.prepend(cardElement);
 }
 
 function handleImageClick(cardData) {
   modalImage.src = cardData.link;
-  imageModalTitle.alt = cardData.name;
+  modalImage.alt = cardData.name;
   imageModalTitle.textContent = cardData.name;
   openModal(imageModalPreview);
 }
