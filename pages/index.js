@@ -106,6 +106,7 @@ function handleImageClick(cardData) {
 function prefillProfileData() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
+  editFormValidator.disableButton();
   openModal(profileEditModal);
 }
 
@@ -166,6 +167,7 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardListElement);
   addCardFormElement.reset();
   closeModal(addCardModal);
+  addFormValidator.disableButton();
 }
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
