@@ -106,7 +106,7 @@ function handleImageClick(cardData) {
 function prefillProfileData() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
-  editFormValidator.disableButton();
+  editFormValidator.resetValidation();
   openModal(profileEditModal);
 }
 
