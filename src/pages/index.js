@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import "./index.css";
 
 const initialCards = [
   {
@@ -109,26 +110,26 @@ function prefillProfileData() {
   editFormValidator.resetValidation();
   openModal(profileEditModal);
 }
-
+// Popup.js
 function handleEscapeToClose(event) {
   if (event.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     closeModal(openedModal);
   }
 }
-
+//Popup.js
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeToClose);
   modal.addEventListener("mousedown", closeModalOnClick);
 }
-
+//Popup.js
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeToClose);
   modal.removeEventListener("mousedown", closeModalOnClick);
 }
-
+//Popup.js
 function closeModalOnClick(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.currentTarget);
