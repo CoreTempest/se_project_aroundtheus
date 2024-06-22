@@ -7,10 +7,10 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/components.js";
 
-//                                    NEED TO FIX
-// Profile edit button opens the "add card" modal. Find out where and why that's happening.
-// Header and profile image still broken (?) in html file.
-// Clean up the rest of index.js, aka refactor remaining functions, handlers and event listeners as needed.
+//                                    NEED TO FIX LIST
+// Profile edit button opens the "add card" modal. Find out where and why that's happening. FIXED
+// Header and profile image still broken (?) in html file. FIXED
+// Clean up the rest of index.js, aka refactor remaining functions, handlers and event listeners as needed. I hope FIXED (pending review)
 
 // Wrappers
 // Wrappers
@@ -45,8 +45,8 @@ const cardUrlInput = document.querySelector(".modal__input_type_url");
 const nameInput = document.querySelector(".modal__input_type_name");
 const jobInput = document.querySelector(".modal__input_type_description");
 
-// Child Consts
-// Child Consts
+// Child Consts & Set up
+// Child Consts & Set up
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#edit-modal",
@@ -119,32 +119,7 @@ function prefillProfileData() {
   editFormValidator.resetValidation();
   editProfilePopup.open();
 }
-// Popup.js
-/*function handleEscapeToClose(event) {
-  if (event.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    closeModal(openedModal);
-  }
-}
-//Popup.js
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscapeToClose);
-  modal.addEventListener("mousedown", closeModalOnClick);
-}
-//Popup.js
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscapeToClose);
-  modal.removeEventListener("mousedown", closeModalOnClick);
-}
-//Popup.js
- function closeModalOnClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeModal(evt.currentTarget);
-  }
-}*/
 //Event Listeners
 //Event Listeners
 
@@ -179,3 +154,30 @@ function handleAddCardFormSubmit(e) {
 }
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
+
+// Popup.js
+/*function handleEscapeToClose(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
+//Popup.js
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscapeToClose);
+  modal.addEventListener("mousedown", closeModalOnClick);
+}
+//Popup.js
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscapeToClose);
+  modal.removeEventListener("mousedown", closeModalOnClick);
+}
+//Popup.js
+ function closeModalOnClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
+}*/
