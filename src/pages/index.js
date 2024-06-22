@@ -78,7 +78,7 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 profileEditBtn.addEventListener("click", () => {
-  editProfilePopup.open();
+  //editProfilePopup.open();
   profileTitleInput.value = userInfo.textContent;
   profileDescriptionInput.value = userInfo.textContent;
   editFormValidator.disableButton();
@@ -123,12 +123,12 @@ function prefillProfileData() {
 //Event Listeners
 //Event Listeners
 
-profileEditBtn.addEventListener("click", prefillProfileData);
-
 closeButtons.forEach((button) => {
   const modal = button.closest(".modal");
-  button.addEventListener("click", () => modal.close());
+  button.addEventListener("click", () => newCardPopup.close());
 });
+
+profileEditBtn.addEventListener("click", prefillProfileData);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
@@ -139,17 +139,18 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 //Event Handlers
 //Event Handlers
 
-function handleProfileEditSubmit(e) {
+function handleProfileEditSubmit(userData) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  newCardPopup.close();
+  userInfo.setUserInfo(userData);
+  editProfilePopup.close();
 }
 function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListElement);
   addCardFormElement.reset();
-  closeModal(addCardModal);
+  newCardPopup.close();
   addFormValidator.disableButton();
 }
 
