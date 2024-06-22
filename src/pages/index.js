@@ -5,32 +5,12 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago Di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+import { initialCards, settings } from "../utils/components.js";
+
+//                                    NEED TO FIX
+// Profile edit button opens the "add card" modal. Find out where and why that's happening.
+// Header and profile image still broken (?) in html file.
+// Clean up the rest of index.js, aka refactor remaining functions, handlers and event listeners as needed.
 
 // Wrappers
 // Wrappers
@@ -68,6 +48,12 @@ const jobInput = document.querySelector(".modal__input_type_description");
 // Child Consts
 // Child Consts
 
+const editProfilePopup = new PopupWithForm({
+  popupSelector: "#edit-modal",
+  handleFormSubmit: handleProfileEditSubmit,
+});
+editProfilePopup.setEventListeners();
+
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: handleProfileEditSubmit,
@@ -92,7 +78,7 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 profileEditBtn.addEventListener("click", () => {
-  newCardPopup.open();
+  editProfilePopup.open();
   profileTitleInput.value = userInfo.textContent;
   profileDescriptionInput.value = userInfo.textContent;
   editFormValidator.disableButton();
@@ -101,15 +87,6 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 
 // Validation
 // Validation
-
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: ".modal__input_type_error",
-  errorClass: ".modal__error_visible",
-};
 
 const editFormValidator = new FormValidator(settings, profileEditModal);
 const addFormValidator = new FormValidator(settings, addCardModal);
@@ -140,30 +117,30 @@ function prefillProfileData() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
   editFormValidator.resetValidation();
-  newCardPopup.open();
+  editProfilePopup.open();
 }
 // Popup.js
-function handleEscapeToClose(event) {
+/*function handleEscapeToClose(event) {
   if (event.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     closeModal(openedModal);
   }
 }
 //Popup.js
-/*function openModal(modal) {
+function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeToClose);
   modal.addEventListener("mousedown", closeModalOnClick);
-}*/
+}
 //Popup.js
 
-/*function closeModal(modal) {
+function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeToClose);
   modal.removeEventListener("mousedown", closeModalOnClick);
-}*/
+}
 //Popup.js
-/* function closeModalOnClick(evt) {
+ function closeModalOnClick(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.currentTarget);
   }
@@ -175,7 +152,7 @@ profileEditBtn.addEventListener("click", prefillProfileData);
 
 closeButtons.forEach((button) => {
   const modal = button.closest(".modal");
-  button.addEventListener("click", () => newCardPopup.close());
+  button.addEventListener("click", () => modal.close());
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
