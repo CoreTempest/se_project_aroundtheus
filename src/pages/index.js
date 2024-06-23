@@ -56,7 +56,7 @@ editProfilePopup.setEventListeners();
 
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
-  handleFormSubmit: handleProfileEditSubmit,
+  handleFormSubmit: handleAddCardFormSubmit,
 });
 newCardPopup.setEventListeners();
 
@@ -124,15 +124,15 @@ function prefillProfileData() {
 //Event Listeners
 
 closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
+  //const modal = button.closest(".modal");
   button.addEventListener("click", () => newCardPopup.close());
 });
 
 profileEditBtn.addEventListener("click", prefillProfileData);
 
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+//profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+//addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 addNewCardButton.addEventListener("click", () => newCardPopup.open());
 
@@ -140,8 +140,8 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 //Event Handlers
 
 function handleProfileEditSubmit(userData) {
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+  profileTitle.textContent = userData.title;
+  profileDescription.textContent = userData.description;
   userInfo.setUserInfo(userData);
   editProfilePopup.close();
 }
