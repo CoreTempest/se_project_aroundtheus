@@ -140,7 +140,7 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 //Event Handlers
 
 function handleProfileEditSubmit(userData) {
-  profileTitle.textContent = userData.title;
+  profileTitle.textContent = userData.name;
   profileDescription.textContent = userData.description;
   userInfo.setUserInfo(userData);
   editProfilePopup.close();
