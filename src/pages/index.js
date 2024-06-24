@@ -46,6 +46,11 @@ const renderCard = (cardData) => {
   section.addItem(cardElement);
 };
 
+// function createCard(item) {
+// here you create a card
+//return cardElement.getView();
+//}
+
 const section = new Section(
   { items: initialCards, renderer: renderCard },
   ".cards__list"
@@ -83,12 +88,6 @@ const userInfo = new UserInfo({
   jobElement: "#profile-description-input",
 });
 
-profileEditBtn.addEventListener("click", () => {
-  profileTitleInput.value = userInfo.textContent;
-  profileDescriptionInput.value = userInfo.textContent;
-  editFormValidator.disableButton();
-});
-
 // Validation
 // Validation
 
@@ -113,10 +112,6 @@ function prefillProfileData() {
 
 //Event Listeners
 //Event Listeners
-
-closeButtons.forEach((button) => {
-  button.addEventListener("click", () => newCardPopup.close());
-});
 
 profileEditBtn.addEventListener("click", prefillProfileData);
 

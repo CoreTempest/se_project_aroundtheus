@@ -47,9 +47,6 @@ export default class Card {
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     this._cardTitleElement.textContent = this._name;
-    this._cardImageElement.setAttribute("src", this._link);
-    this._cardImageElement.setAttribute("alt", this._name);
-    this._cardTitleElement.textContent = this._name;
 
     this._setEventListeners();
     return this._cardElement;
