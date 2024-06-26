@@ -20,13 +20,6 @@ const addCardFormElement = document.querySelector("#add-card-form");
 // Buttons & DOM
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
-const closeButtons = document.querySelectorAll(".modal__close");
 const addNewCardButton = document.querySelector(".profile__add-button");
 
 // Form Data
@@ -36,15 +29,21 @@ const cardTitleInput = document.querySelector(".modal__input_type_title");
 const cardUrlInput = document.querySelector(".modal__input_type_url");
 const nameInput = document.querySelector(".modal__input_type_name");
 const jobInput = document.querySelector(".modal__input_type_description");
+const profileNameElement = document.querySelector("#profile-title-input");
+const jobElement = document.querySelector("#profile-description-input");
 
 //Section.js
 //Section.js
 
 const renderCard = (cardData) => {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  const cardElement = card.getView();
-  section.addItem(cardElement);
+  const card = createCard(cardData);
+  section.addItem(card);
 };
+
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
+}
 
 // function createCard(item) {
 // here you create a card
@@ -83,10 +82,7 @@ newImagePopup.setEventListeners();
 // UserInfo
 // UserInfo
 
-const userInfo = new UserInfo({
-  profileNameElement: "#profile-title-input",
-  jobElement: "#profile-description-input",
-});
+const userInfo = new UserInfo(profileNameElement, jobElement);
 
 // Validation
 // Validation
@@ -104,8 +100,9 @@ function handleImageClick(cardData) {
 }
 
 function prefillProfileData() {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileDescription.textContent;
+  const { name, description } = userInfo.getUserInfo();
+  nameInput.value = name || "";
+  jobInput.value = description || "";
   editFormValidator.resetValidation();
   editProfilePopup.open();
 }
@@ -121,8 +118,6 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 //Event Handlers
 
 function handleProfileEditSubmit(userData) {
-  profileTitle.textContent = userData.name;
-  profileDescription.textContent = userData.description;
   userInfo.setUserInfo(userData);
   editProfilePopup.close();
 }
