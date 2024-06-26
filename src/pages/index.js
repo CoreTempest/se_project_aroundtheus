@@ -13,6 +13,8 @@ import { initialCards, settings } from "../utils/components.js";
 const cardListElement = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
+const profileDescription = document.querySelector("#profile-description-input");
+const profileTitle = document.querySelector("#profile-title-input");
 
 const addCardFormElement = document.querySelector("#add-card-form");
 
@@ -100,9 +102,6 @@ function handleImageClick(cardData) {
 }
 
 function prefillProfileData() {
-  const { name, description } = userInfo.getUserInfo();
-  nameInput.value = name || "";
-  jobInput.value = description || "";
   editFormValidator.resetValidation();
   editProfilePopup.open();
 }
