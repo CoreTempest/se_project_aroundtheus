@@ -12,11 +12,7 @@ import { initialCards, settings } from "../utils/components.js";
 
 const cardListElement = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
-const editProfile = document.querySelector("#edit-profile-form");
 const addCardModal = document.querySelector("#add-card-modal");
-const profileDescription = document.querySelector(".profile__description");
-const profileTitle = document.querySelector(".profile__title");
-
 const addCardFormElement = document.querySelector("#add-card-form");
 
 // Buttons & DOM
@@ -24,7 +20,6 @@ const addCardFormElement = document.querySelector("#add-card-form");
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
-const submitButton = document.querySelector(".modal__button");
 
 // Form Data
 // Form Data
@@ -36,8 +31,8 @@ const jobInput = document.querySelector("#profile-description-input");
 const profileNameElement = document.querySelector(".profile__title");
 const jobElement = document.querySelector(".profile__description");
 
-//Section.js
-//Section.js
+// Cards
+// Cards
 
 const renderCard = (cardData) => {
   const card = createCard(cardData);
@@ -48,6 +43,9 @@ function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
 }
+
+//Section.js
+//Section.js
 
 const section = new Section(
   { items: initialCards, renderer: renderCard },
@@ -111,18 +109,6 @@ function handleImageClick(cardData) {
   newImagePopup.open(cardData);
 }
 
-//Event Listeners
-//Event Listeners
-
-submitButton.addEventListener("submit", handleProfileEditSubmit);
-
-profileEditBtn.addEventListener("click", prefillProfileData);
-
-addNewCardButton.addEventListener("click", () => newCardPopup.open());
-
-//Event Handlers
-//Event Handlers
-
 function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
@@ -131,3 +117,13 @@ function handleAddCardFormSubmit(e) {
   newCardPopup.close();
   addFormValidator.disableButton();
 }
+
+//Event Listeners
+//Event Listeners
+
+profileEditBtn.addEventListener("click", prefillProfileData);
+
+addNewCardButton.addEventListener("click", () => newCardPopup.open());
+
+//Event Handlers
+//Event Handlers
