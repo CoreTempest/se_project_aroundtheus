@@ -12,9 +12,10 @@ import { initialCards, settings } from "../utils/components.js";
 
 const cardListElement = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
+const editProfile = document.querySelector("#edit-profile-form");
 const addCardModal = document.querySelector("#add-card-modal");
-const profileDescription = document.querySelector("#profile-description-input");
-const profileTitle = document.querySelector("#profile-title-input");
+const profileDescription = document.querySelector(".profile__description");
+const profileTitle = document.querySelector(".profile__title");
 
 const addCardFormElement = document.querySelector("#add-card-form");
 
@@ -23,16 +24,17 @@ const addCardFormElement = document.querySelector("#add-card-form");
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
+const submitButton = document.querySelector(".modal__button");
 
 // Form Data
 // Form Data
 
 const cardTitleInput = document.querySelector(".modal__input_type_title");
 const cardUrlInput = document.querySelector(".modal__input_type_url");
-const nameInput = document.querySelector(".modal__input_type_name");
-const jobInput = document.querySelector(".modal__input_type_description");
-const profileNameElement = document.querySelector("#profile-title-input");
-const jobElement = document.querySelector("#profile-description-input");
+const nameInput = document.querySelector("#profile-name-input");
+const jobInput = document.querySelector("#profile-description-input");
+const profileNameElement = document.querySelector(".profile__title");
+const jobElement = document.querySelector(".profile__description");
 
 //Section.js
 //Section.js
@@ -46,11 +48,6 @@ function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
 }
-
-// function createCard(item) {
-// here you create a card
-//return cardElement.getView();
-//}
 
 const section = new Section(
   { items: initialCards, renderer: renderCard },
@@ -97,17 +94,27 @@ addFormValidator.enableValidation();
 //Functions
 //Functions
 
-function handleImageClick(cardData) {
-  newImagePopup.open(cardData);
+function handleProfileEditSubmit(userData) {
+  userInfo.setUserInfo(userData);
+  editProfilePopup.close();
 }
 
 function prefillProfileData() {
+  const { name, description } = userInfo.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = description;
   editFormValidator.resetValidation();
   editProfilePopup.open();
 }
 
+function handleImageClick(cardData) {
+  newImagePopup.open(cardData);
+}
+
 //Event Listeners
 //Event Listeners
+
+submitButton.addEventListener("submit", handleProfileEditSubmit);
 
 profileEditBtn.addEventListener("click", prefillProfileData);
 
@@ -116,10 +123,6 @@ addNewCardButton.addEventListener("click", () => newCardPopup.open());
 //Event Handlers
 //Event Handlers
 
-function handleProfileEditSubmit(userData) {
-  userInfo.setUserInfo(userData);
-  editProfilePopup.close();
-}
 function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
