@@ -68,8 +68,6 @@ const newCardPopup = new PopupWithForm({
 });
 newCardPopup.setEventListeners();
 
-addNewCardButton.addEventListener("click", () => newCardPopup.open());
-
 // PopupWithImage
 // PopupWithImage
 
@@ -109,9 +107,9 @@ function handleImageClick(cardData) {
   newImagePopup.open(cardData);
 }
 
-function handleAddCardFormSubmit(e) {
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
+function handleAddCardFormSubmit(userInfo) {
+  const name = userInfo.title;
+  const link = userInfo.url;
   renderCard({ name, link }, cardListElement);
   addCardFormElement.reset();
   newCardPopup.close();
