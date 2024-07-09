@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/components.js";
 import Api from "../components/Api.js";
+import DeleteConfirm from "../components/DeleteConfirm.js";
 
 // Wrappers
 // Wrappers
@@ -33,9 +34,19 @@ const jobInput = document.querySelector("#profile-description-input");
 const profileNameElement = document.querySelector(".profile__title");
 const jobElement = document.querySelector(".profile__description");
 const editAvatarForm = document.forms["profile-avatar-form"];
+const avatarElement = document.querySelector("#profile__image");
+const deleteCardForm = document.forms["delete-card-form"];
 
-// Cards
-// Cards
+// Cards & API
+// Cards & API
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "08f4dfe1-21ea-4bc5-b16b-fd0c38e22f31",
+    "Content-Type": "application/json",
+  },
+});
 
 const renderCard = (cardData) => {
   const card = createCard(cardData);
@@ -47,14 +58,51 @@ function createCard(cardData) {
   return card.getView();
 }
 
+Promise.all([api.getInitialCards(), api.getProfileInfo()])
+  .then(([cards, userInfo]) => {
+    console.log(cards, userInfo);
+  })
+  .catch((err) => console.error(err));
+
+let section;
+
+api
+  .getInitialCards()
+  .then((initialCards) => {
+    section = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          const cardElement = createCard(data);
+          section.addItem(cardElement);
+        },
+      },
+      ".cards__list"
+    );
+    section.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+api
+  .getProfileInfo()
+  .then((userData) => {
+    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setAvatar(userData.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 //Section.js
 //Section.js
 
-const section = new Section(
+/*const section = new Section(
   { items: initialCards, renderer: renderCard },
   ".cards__list"
 );
-section.renderItems();
+section.renderItems(); */
 
 // PopupWithForm
 // PopupWithForm
@@ -63,31 +111,34 @@ const editProfilePopup = new PopupWithForm({
   popupSelector: "#edit-modal",
   handleFormSubmit: handleProfileEditSubmit,
 });
-editProfilePopup.setEventListeners();
 
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
-newCardPopup.setEventListeners();
 
 const avatarPopup = new PopupWithForm({
   popupSelector: "#profile-avatar-modal",
   handleFormSubmit: handleAvatarFormSubmit,
 });
 
-avatarPopup.setEventListeners();
-
 // PopupWithImage
 // PopupWithImage
 
-const newImagePopup = new PopupWithImage("#image-preview-modal");
-newImagePopup.setEventListeners();
+const newImagePopup = new PopupWithImage(
+  "#image-preview-modal",
+  handleImageClick
+);
 
 // UserInfo
 // UserInfo
 
-const userInfo = new UserInfo(profileNameElement, jobElement);
+const userInfo = new UserInfo(profileNameElement, jobElement, avatarElement);
+
+// DeletePopup
+// DeletePopup
+
+const cardDeletePopup = new DeleteConfirm("#delete-card", deleteCardForm);
 
 // Validation
 // Validation
@@ -127,6 +178,12 @@ function handleAvatarFormSubmit(userData) {
     });
 }
 
+function handleDeleteCard() {}
+
+function handleLikeCard() {}
+
+function handleDeleteModal() {}
+
 function handleProfileEditSubmit(userData) {
   userInfo.setUserInfo(userData);
   editProfilePopup.close();
@@ -156,26 +213,16 @@ function handleAddCardFormSubmit(userInfo) {
 //Event Listeners
 //Event Listeners
 
+cardDeletePopup.setEventListeners();
+
+editProfilePopup.setEventListeners();
+
+newCardPopup.setEventListeners();
+
+avatarPopup.setEventListeners();
+
+newImagePopup.setEventListeners();
+
 profileEditBtn.addEventListener("click", prefillProfileData);
 
 addNewCardButton.addEventListener("click", () => newCardPopup.open());
-
-//API
-//API
-
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "08f4dfe1-21ea-4bc5-b16b-fd0c38e22f31",
-    "Content-Type": "application/json",
-  },
-});
-
-api
-  .getUserInfo()
-  .then((res) => {
-    userInfo.setUserInfo({ name: res.name, description: res.about });
-  })
-  .catch((err) => {
-    console.error(err);
-  });

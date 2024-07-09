@@ -11,18 +11,20 @@ export default class Api {
     return Promise.reject(`Error:${res.status}`);
   }
 
-  getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      method: "GET",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
   getProfileInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return res
+        .json()
+        .then((err) =>
+          Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`)
+        );
+    });
   }
 
   editProfileInfo(userData) {
@@ -46,15 +48,22 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
+  getInitialCards() {
+    return this._checkResponse(`${this._baseUrl}/cards`, {
+      method: "GET",
+      headers: this._headers,
+    });
+  }
+
   newCardAdd(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._checkResponse(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   cardDelete() {
@@ -73,25 +82,8 @@ export default class Api {
 
   dislikeCard() {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
+      method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);
   }
-
-  /*getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-        method: "GET",
-        headers: this._headers,
-    }).then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return res
-        .json()
-        .then((err) => 
-        Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`));
-    });
-  }*/
 }
-
-// other methods included here
