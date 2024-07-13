@@ -7,13 +7,13 @@ export default class DeleteConfirm extends Popup {
     this._deleteCardForm = deleteCardForm;
   }
 
-  confirmDelete(apiConfirm) {
-    this._handleCardDelete = apiConfirm;
+  submitHandler(handler) {
+    this._handleCardDelete = handler;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._deleteCardForm.addEventListeners("submit", (evt) => {
+    this._deleteCardForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleCardDelete();
     });

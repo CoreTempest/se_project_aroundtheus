@@ -8,55 +8,50 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Error:${res.status}`);
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
   }
 
   getProfileInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return res
-        .json()
-        .then((err) =>
-          Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`)
-        );
     });
   }
 
-  editProfileInfo(userData) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  editProfileInfo(name, about) {
+    return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: userData.name,
-        about: userData.description,
+        name,
+        about,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   avatarImageUpdate({ link }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   getInitialCards() {
-    return this._checkResponse(`${this._baseUrl}/cards`, {
+    return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
     });
   }
 
   newCardAdd(data) {
-    return this._checkResponse(`${this._baseUrl}/cards`, {
+    return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -66,24 +61,24 @@ export default class Api {
     });
   }
 
-  cardDelete() {
-    return fetch(`${this._baseUrl}/cards/cardId`, {
+  cardDelete(cardId) {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this_checkResponse);
+    });
   }
 
-  likeCard() {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  likeCard(cardId) {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this_headers,
-    }).then(this._checkResponse);
+    });
   }
 
-  dislikeCard() {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  dislikeCard(cardId) {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 }
