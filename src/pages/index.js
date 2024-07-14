@@ -5,7 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { settings } from "../utils/components.js";
+import { initialCards, settings } from "../utils/components.js";
 import Api from "../components/Api.js";
 import DeleteConfirm from "../components/DeleteConfirm.js";
 
@@ -25,6 +25,7 @@ const profileDescriptionInput = document.querySelector(
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const editAvatarButton = document.querySelector(".profile__avatar-button");
+const confirmDeleteBtn = document.querySelector(".modal__submit-button");
 
 // Form Data
 // Form Data
@@ -52,7 +53,7 @@ api
   .then((cards) => {
     section = new Section(
       {
-        items: cards,
+        items: initialCards,
         renderer: (data) => {
           const cardElement = createCard(data);
           section.addItem(cardElement);
@@ -147,6 +148,10 @@ editAvatarButton.addEventListener("click", () => {
   avatarPopup.open();
 });
 
+confirmDeleteBtn.addEventListener("click", () => {
+  cardDeletePopup.close();
+});
+
 profileEditBtn.addEventListener("click", () => {
   editProfilePopup.open();
   const newUserInfo = userInfo.getUserInfo();
@@ -177,7 +182,7 @@ function handleDeleteModal(card) {
 
 function handleDeleteCard(card) {
   api
-    .deleteCard(card.getCardId())
+    .cardDelete(card.gatherCardId())
     .then(() => {
       card.handleDeleteCard();
       cardDeletePopup.close();
