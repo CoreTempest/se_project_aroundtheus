@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
     const cardData = {};
     this._inputList.forEach((input) => {
-      data[input.name] = input.value;
+      cardData[input.name] = input.value;
     });
     return cardData;
   }

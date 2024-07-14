@@ -33,12 +33,12 @@ export default class Api {
     });
   }
 
-  avatarImageUpdate({ link }) {
+  avatarImageUpdate({ avatar }) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar,
       }),
     });
   }
@@ -71,7 +71,7 @@ export default class Api {
   likeCard(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: this_headers,
+      headers: this._headers,
     });
   }
 

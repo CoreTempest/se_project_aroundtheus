@@ -69,16 +69,12 @@ api
 // UserInfo
 // UserInfo
 
-const userInfo = new UserInfo({
-  profileNameElement: "#name",
-  jobElement: "#about",
-  avatarElement: "#avatar",
-});
+const userInfo = new UserInfo("#name", "#about", "#avatar");
 
 api
   .getProfileInfo()
   .then((userData) => {
-    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setUserInfo(userData.name, userData.description);
     userInfo.setAvatar(userData.avatar);
   })
   .catch((err) => {
@@ -148,7 +144,7 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 editAvatarButton.addEventListener("click", () => {
-  editAvatarForm.open();
+  avatarPopup.open();
 });
 
 profileEditBtn.addEventListener("click", () => {
@@ -175,7 +171,7 @@ function createCard(cardData) {
 }
 
 function handleDeleteModal(card) {
-  cardDeletePopup.setSubmitHandler(() => handleDeleteCard(card));
+  cardDeletePopup.submitHandler(() => handleDeleteCard(card));
   cardDeletePopup.open();
 }
 
@@ -196,7 +192,7 @@ function handleLikeCard(card) {
     api
       .dislikeCard(card.gatherCardId())
       .then((res) => {
-        card.handleLike(res.isLiked);
+        card.handleLike(false);
       })
       .catch((err) => {
         console.error(err);
@@ -205,7 +201,7 @@ function handleLikeCard(card) {
     api
       .likeCard(card.gatherCardId())
       .then((res) => {
-        card.handleLike(res.isLiked);
+        card.handleLike(true);
       })
       .catch((err) => {
         console.error(err);
@@ -219,7 +215,7 @@ function handleLikeCard(card) {
 function handleAddCardFormSubmit(data) {
   newCardPopup.renderloading(true);
   api
-    .addCard(data)
+    .newCardAdd({ name: data.title, link: data.url })
     .then((data) => {
       const addCardElement = createCard(data);
       section.addItem(addCardElement);
@@ -238,7 +234,7 @@ function handleAddCardFormSubmit(data) {
 function handleProfileEditSubmit(userData) {
   editProfilePopup.renderloading(true);
   api
-    .updateUserInfo(userData.name, userData.about)
+    .editProfileInfo(userData.name, userData.description)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
       editFormValidator.disableButton();
@@ -257,7 +253,7 @@ function handleAvatarFormSubmit(userData) {
   api
     .avatarImageUpdate(userData)
     .then((res) => {
-      userInfo.setUserAvatar(res.avatar);
+      userInfo.setAvatar(res.avatar);
     })
     .catch((err) => {
       console.log(err);

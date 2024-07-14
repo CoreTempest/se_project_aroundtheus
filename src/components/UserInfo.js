@@ -1,8 +1,8 @@
 export default class UserInfo {
   constructor(profileNameElement, jobElement, avatarElement) {
-    this._displayedName = profileNameElement;
-    this._displayedJob = jobElement;
-    this._avatarElement = avatarElement;
+    this._displayedName = document.querySelector(profileNameElement);
+    this._displayedJob = document.querySelector(jobElement);
+    this._avatarElement = document.querySelector(avatarElement);
   }
 
   getUserInfo() {

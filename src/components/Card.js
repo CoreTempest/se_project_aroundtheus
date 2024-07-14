@@ -37,8 +37,8 @@ export default class Card {
     });
   }
 
-  _handleLike(isLiked) {
-    this.isLiked = isLiked;
+  handleLike(isLiked) {
+    this._isLiked = isLiked;
     this.renderCardLike();
   }
 
