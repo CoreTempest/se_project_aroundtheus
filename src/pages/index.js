@@ -103,10 +103,7 @@ const avatarPopup = new PopupWithForm({
 // PopupWithImage
 // PopupWithImage
 
-const newImagePopup = new PopupWithImage(
-  "#image-preview-modal",
-  handleImageClick
-);
+const newImagePopup = new PopupWithImage("#image-preview-modal");
 
 // DeletePopup
 // DeletePopup
@@ -116,6 +113,7 @@ const cardDeletePopup = new DeleteConfirm("#delete-card", deleteCardForm);
 // Event Listeners
 // Event Listeners
 
+newImagePopup.setEventListeners();
 cardDeletePopup.setEventListeners();
 editProfilePopup.setEventListeners();
 newCardPopup.setEventListeners();
@@ -136,8 +134,8 @@ avatarFormValidator.enableValidation();
 // Modals
 // Modals
 
-function handleImageClick(cardData) {
-  newImagePopup.open(cardData);
+function handleImageClick(name, link) {
+  newImagePopup.open({ name, link });
 }
 
 addNewCardButton.addEventListener("click", () => {
