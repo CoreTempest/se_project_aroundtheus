@@ -14,7 +14,6 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleDeleteModal = handleDeleteModal;
     this._handleLikeCard = handleLikeCard;
-    console.log("Card ID during initialization:", this._id);
   }
 
   _setEventListeners() {
@@ -36,6 +35,7 @@ export default class Card {
   }
 
   handleLike(isLiked) {
+    console.log(isLiked);
     this._isLiked = isLiked;
     this.renderCardLike();
   }
@@ -49,7 +49,7 @@ export default class Card {
   }
 
   isLiked() {
-    return this.isLiked;
+    return this._isLiked;
   }
 
   handleDelete() {

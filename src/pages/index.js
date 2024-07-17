@@ -5,19 +5,9 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, settings } from "../utils/components.js";
+import { settings } from "../utils/components.js";
 import Api from "../components/Api.js";
 import DeleteConfirm from "../components/DeleteConfirm.js";
-
-// Wrappers
-// Wrappers
-
-const profileEditModal = document.querySelector("#edit-modal");
-const addCardModal = document.querySelector("#add-card-modal");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
 
 // Buttons & DOM
 // Buttons & DOM
@@ -53,7 +43,7 @@ api
   .then((cards) => {
     section = new Section(
       {
-        items: initialCards,
+        items: cards,
         cards,
         renderer: (data) => {
           const cardElement = createCard(data);
@@ -76,7 +66,7 @@ const userInfo = new UserInfo("#name", "#about", "#avatar");
 api
   .getProfileInfo()
   .then((userData) => {
-    userInfo.setUserInfo(userData.name, userData.description);
+    userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setAvatar(userData.avatar);
   })
   .catch((err) => {
@@ -200,8 +190,8 @@ function handleLikeCard(card) {
   if (card.isLiked) {
     api
       .dislikeCard(card.gatherCardId())
-      .then(() => {
-        card.handleLike(false);
+      .then((res) => {
+        card.handleLike(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -209,8 +199,8 @@ function handleLikeCard(card) {
   } else {
     api
       .likeCard(card.gatherCardId())
-      .then(() => {
-        card.handleLike(true);
+      .then((res) => {
+        card.handleLike(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
