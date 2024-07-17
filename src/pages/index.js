@@ -54,6 +54,7 @@ api
     section = new Section(
       {
         items: initialCards,
+        cards,
         renderer: (data) => {
           const cardElement = createCard(data);
           section.addItem(cardElement);
@@ -113,6 +114,9 @@ const cardDeletePopup = new DeleteConfirm("#delete-card", deleteCardForm);
 // Event Listeners
 // Event Listeners
 
+profileFormElement.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
 newImagePopup.setEventListeners();
 cardDeletePopup.setEventListeners();
 editProfilePopup.setEventListeners();
@@ -150,8 +154,9 @@ confirmDeleteBtn.addEventListener("click", () => {
   cardDeletePopup.close();
 });
 
-profileEditBtn.addEventListener("click", () => {
+profileEditBtn.addEventListener("click", (e) => {
   editProfilePopup.open();
+  e.preventDefault();
   const newUserInfo = userInfo.getUserInfo();
   document.querySelector("#profile-name-input").value = newUserInfo.name;
   document.querySelector("#profile-description-input").value =
@@ -179,11 +184,12 @@ function handleDeleteModal(card) {
 }
 
 function handleDeleteCard(card) {
+  const cardId = card.gatherCardId();
   api
-    .cardDelete(card.gatherCardId())
+    .cardDelete(cardId)
     .then(() => {
       card.handleDelete();
-      cardDeletePopup.close();
+      //cardDeletePopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -194,7 +200,7 @@ function handleLikeCard(card) {
   if (card.isLiked) {
     api
       .dislikeCard(card.gatherCardId())
-      .then((res) => {
+      .then(() => {
         card.handleLike(false);
       })
       .catch((err) => {
@@ -203,7 +209,7 @@ function handleLikeCard(card) {
   } else {
     api
       .likeCard(card.gatherCardId())
-      .then((res) => {
+      .then(() => {
         card.handleLike(true);
       })
       .catch((err) => {
@@ -241,13 +247,13 @@ function handleProfileEditSubmit(userData) {
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
       editFormValidator.disableButton();
-      editProfilePopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       editProfilePopup.renderloading(false);
+      editProfilePopup.close();
     });
 }
 

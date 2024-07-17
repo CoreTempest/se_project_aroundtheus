@@ -14,6 +14,7 @@ export default class PopupWithForm extends Popup {
     const cardData = {};
     this._inputList.forEach((input) => {
       cardData[input.name] = input.value;
+      cardData[input.about] = input.value;
     });
     return cardData;
   }
