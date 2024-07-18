@@ -48,10 +48,6 @@
   background: url(../images/like-active.svg);
 }
 
-.card__like-button:hover {
-  opacity: 50%;
-}
-
 .card__delete-button {
   background: transparent url(../images/trash-icon.svg) center no-repeat;
   position: absolute;

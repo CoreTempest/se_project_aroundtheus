@@ -35,13 +35,13 @@ export default class Card {
   }
 
   handleLike(isLiked) {
-    console.log(isLiked);
     this._isLiked = isLiked;
     this.renderCardLike();
+    console.log(isLiked);
   }
 
   renderCardLike() {
-    if (this._isLiked) {
+    if (!this._isLiked) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
       this._likeButton.classList.remove("card__like-button_active");

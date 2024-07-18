@@ -66,6 +66,10 @@
   margin: auto;
 }
 
+.modal__submit-button:hover {
+  cursor: pointer;
+}
+
 .modal__container_delete {
   width: 430px;
   height: 181px;

@@ -7,7 +7,7 @@ export default class DeleteConfirm extends Popup {
     this._deleteCardForm = deleteCardForm;
   }
 
-  submitHandler(handler) {
+  setSubmitHandler(handler) {
     this._handleCardDelete = handler;
   }
 
