@@ -7,7 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { settings } from "../utils/components.js";
 import Api from "../components/Api.js";
-import DeleteConfirm from "../components/DeleteConfirm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 // Buttons & DOM
 // Buttons & DOM
@@ -101,7 +101,10 @@ const newImagePopup = new PopupWithImage("#image-preview-modal");
 // DeletePopup
 // DeletePopup
 
-const cardDeletePopup = new DeleteConfirm("#delete-card", deleteCardForm);
+const cardDeletePopup = new PopupWithConfirmation(
+  "#delete-card",
+  deleteCardForm
+);
 
 // Event Listeners
 // Event Listeners
@@ -146,7 +149,7 @@ profileEditBtn.addEventListener("click", (e) => {
   editProfilePopup.open();
   e.preventDefault();
   const newUserInfo = userInfo.getUserInfo();
-  newUserInfo.setInputValues();
+  editProfilePopup.setInputValues(newUserInfo);
   //profileNameInput.value = newUserInfo.name;
   //profileDescInput.value = newUserInfo.description;
 });
@@ -163,6 +166,7 @@ function createCard(cardData) {
     handleLikeCard
   );
   const cardElement = card.getView();
+  //card.renderCardLike();
   return cardElement;
 }
 
@@ -185,20 +189,20 @@ function handleDeleteCard(card) {
 }
 
 function handleLikeCard(card) {
-  if (card.isLiked) {
+  if (!card.isLiked()) {
     api
-      .dislikeCard(card.gatherCardId())
-      .then(() => {
-        card.handleLike(false);
+      .likeCard(card.gatherCardId())
+      .then((res) => {
+        card.handleLike(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
       });
-  } else {
+  } else if (card.isLiked) {
     api
-      .likeCard(card.gatherCardId())
-      .then(() => {
-        card.handleLike(true);
+      .dislikeCard(card.gatherCardId())
+      .then((res) => {
+        card.handleLike(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -234,6 +238,7 @@ function handleProfileEditSubmit(userData) {
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
       editFormValidator.disableButton();
+      editProfilePopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -249,6 +254,7 @@ function handleAvatarFormSubmit(userData) {
     .avatarImageUpdate(userData)
     .then((res) => {
       userInfo.setAvatar(res.avatar);
+      avatarPopup.close();
     })
     .catch((err) => {
       console.log(err);

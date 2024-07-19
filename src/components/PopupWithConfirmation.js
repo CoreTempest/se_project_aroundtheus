@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export default class DeleteConfirm extends Popup {
+export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector, deleteCardForm, handleCardDelete) {
     super({ popupSelector });
     this._handleCardDelete = handleCardDelete;
