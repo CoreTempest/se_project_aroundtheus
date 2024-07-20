@@ -6,10 +6,10 @@ export default class PopupWithImage extends Popup {
     this._imagePreview = this._popupElement.querySelector(".modal__image");
     this._textPreview = this._popupElement.querySelector(".modal__image-title");
   }
-  open(data) {
-    this._imagePreview.src = data.link;
-    this._imagePreview.alt = data.name;
-    this._textPreview.textContent = data.name;
+  open({ name, link }) {
+    this._imagePreview.src = link;
+    this._imagePreview.alt = name;
+    this._textPreview.textContent = name;
     super.open();
   }
 }
